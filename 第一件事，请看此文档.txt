@@ -1,0 +1,37 @@
+项目整体结构搭建说明
+school-beans        --主要负责存放实体 例如 entity pojo vo ...   
+school-common       --主要负责存放工具类  例如 StrUtil MD5Util ...
+school-dao          --主要负责存放dao接口以及映射文件，负责访问数据
+school-oauth        --主要负责用户安全验证模块
+school-service      --主要负责业务模块
+school-webapi       --主要负责mvc,及页面html/jsp
+
+pom.xml文件说明
+    最外面的pom.xml 主要集成spring,json,commons,mysql,mybatis,swagger...
+    而每个小模块中的pom.xml 主要集成自己单用的jar,继承与主pom.xml
+    例如dao里面的pom.xml 继承外pom.xml 又拥有自己独立的 school-beans jar
+    清楚分层关系，dao层依赖bean,service依赖dao,同时还可能用着bean,common
+
+    因为是maven项目，最终编译的文件都会到target文件夹中，所以不得不把*Mapper.xml文件
+        放到resources文件夹中，但是这样一来多模块失去了意义
+    所以 把*Mapper.xml文件放到school-dao中，体现出多模块专注于一件事情
+        需要如下代码在school-dao pom.xml中，让文件加载到target中
+         <build>
+            <resources>
+                <resource>
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                    </includes>
+                </resource>
+            </resources>
+        </build>
+        目的是无论在哪个模块中，都能够让整个项目包含静态资源xml文件，找到xml文件
+    所有的配置文件都在school-webapi中，集成在这个地方，因为其他的模块只是被看做一个jar包来使，在这些配置文件中，分别扫描dao,mail,service,
+        使用mvc,mybatis,redis
+    最终建议：看这个模板框架需要注意的地方
+        1.jar包怎么集成，按照，一个模块只干一件事情，每个模块用到了就集成单独的，大家都  用到了，就继承公共的。
+        2.dao中的xml如何被扫描 需要仔细查看school-dao中的pom.xml文件
+        3.dao,service怎么扫描的，需要仔细查看school-webapi的resouces的配置文件，
+            因为所有的配置文件都是在school-webapi中
+        

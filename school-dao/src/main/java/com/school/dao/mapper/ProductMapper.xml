@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.dao.ProductMapper">
+    <resultMap id="ProductResultMap" type="Product">
+        <id property="productID" column="productID" />
+        <result property="productName" column="productName"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true"
+            keyProperty="productID">
+        insert into Product (productName)
+        values (#{productName})
+    </insert>
+    <update id="update">
+        update Product
+        <set>
+            <if test="productName!=null and productName!=''">
+            productName=#{productName},
+            </if>
+        </set>
+        where
+        productID=#{productID}
+    </update>
+
+    <delete id="deleteById">
+        delete from Product
+        where
+        productID=#{productID}
+    </delete>
+
+    <select id="getById" resultType="Product">
+        SELECT  productID,productName from Product
+        where
+        productID=#{productID}
+    </select>
+    <select id="getAll" resultType="Product">
+        SELECT  productID,productName
+        from Product
+    </select>
+    <select id="getListByMap" resultType="Product">
+        SELECT  productID,productName
+        from Product
+        <where>
+            <if test="productName!=null and productName!=''">
+            and productName like concat('%',#{productName},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getPaginationTotalByMap" >
+            SELECT count(1)
+            from Product
+            <where>
+                <if test="productName!=null and productName!=''">
+                and productName like concat('%',#{productName},'%')
+                </if>
+            </where>
+    </select>
+    <select id="getPaginationByMap" resultType="Product">
+                SELECT  productID,productName
+                from Product
+                <where>
+                <if test="productName!=null and productName!=''">
+                and productName like concat('%',#{productName},'%')
+                </if>
+                </where>
+                limit  #{start},#{pageSize}
+        </select>
+</mapper>

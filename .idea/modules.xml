@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MySchool.iml" filepath="$PROJECT_DIR$/MySchool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/school-beans/school-beans.iml" filepath="$PROJECT_DIR$/school-beans/school-beans.iml" />
+      <module fileurl="file://$PROJECT_DIR$/school-common/school-common.iml" filepath="$PROJECT_DIR$/school-common/school-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/school-dao/school-dao.iml" filepath="$PROJECT_DIR$/school-dao/school-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/school-oauth/school-oauth.iml" filepath="$PROJECT_DIR$/school-oauth/school-oauth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/school-service/school-service.iml" filepath="$PROJECT_DIR$/school-service/school-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/school-webapi/school-webapi.iml" filepath="$PROJECT_DIR$/school-webapi/school-webapi.iml" />
+    </modules>
+  </component>
+</project>
